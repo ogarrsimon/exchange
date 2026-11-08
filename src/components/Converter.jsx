@@ -18,53 +18,89 @@ const Converter = () => {
         fetchRate()
     }, [baseCurrency, quoteCurrency]) 
     return (
-        <>
-            <h2 className="text-xl mb-0 mt-6 font-mono">Check the Rates</h2>
-            <div className="bg-[var(--surface)] rounded-md p-6 mt-6 mb-10">
-            <div className="flex items-center justify-between mb-4">
+        
+    <>
+    <h2 className="text-xl mb-0 mt-6 font-mono">
+        Check the Rates
+    </h2>
 
-                {/* amount input */}
-            <div className="bg-[var(--surface-secondary)] border-1 border-[#353535] rounded-md p-4 w-xl">
-                <h4 className="text-sm font-bold text-gray-200 mb-4">SEND</h4>
-                <div className="flex">
-                    <input type="number" onChange={getAmount} placeholder="Amount" className="font-mono bg-[var(--surface-secondary)] text-5xl text-white outline-none w-full" />
-                    <CurrencySelector value={baseCurrency} onChange={selectBaseCurrency} />
-                </div>
-                </div> 
+    <div className="bg-[var(--surface)] rounded-md p-3 sm:p-5 md:p-6 mt-6 mb-10">
+        <div className="flex flex-col lg:flex-row gap-4 items-stretch lg:items-center justify-between mb-4">
 
-                {/* swap button */}
-                <div className="mx-12">
-                    <button onClick={() => handleSwap()} className="bg-[var(--surface-secondary)] text-white rounded-md p-2">
-                        <IoIosSwap size={20} />
-                    </button>
-                </div>
+        {/* Amount input */}
+        <div className="bg-[var(--surface-secondary)] border border-[#353535] rounded-md p-4 w-full min-w-0 flex-1">
+            <h4 className="text-sm font-bold text-gray-200 mb-4">
+            SEND
+            </h4>
 
-                {/* receive currency selector */}
-                <div className="bg-[var(--surface-secondary)] border-1 border-[#353535] rounded-md p-4 w-xl">
-                    <h4 className="text-sm font-bold text-gray-200 mb-4">RECEIVE</h4>
-                    <div className="flex w-full justify-between items-center">
-                        <h1 className="text-5xl font-mono font-bold text-[var(--primary)]">{formatAmount((Number(rate) * amount))}</h1>
-                        <CurrencySelector value={quoteCurrency} onChange={selectQuoteCurrency}/>
-                    </div>
-                    
-                    
-                </div>
+            <div className="flex items-center gap-3 min-w-0">
+            <input
+                type="number"
+                onChange={getAmount}
+                placeholder="Amount"
+                className="font-mono bg-transparent text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-white outline-none w-full min-w-0"
+            />
+
+            <div className="shrink-0">
+                <CurrencySelector
+                value={baseCurrency}
+                onChange={selectBaseCurrency}
+                />
             </div>
-            <div className="border-t p-2 mb-0 border-dotted flex items-center justify-between border-gray-500">
-                <p className='mt-2 font-mono mb-0 pb-0'>
-                    1 {baseCurrency} = {formatAmount(rate)} {quoteCurrency}
-                </p>
-                <div className="mt-2">
-                    <button className='bg-[var(--primary)] uppercase p-2 rounded text-black mr-6 '>
-                        Favourited
-                    </button>
-                    <button className='border border-[var(--primary)] rounded p-2'>
-                        Log Conversion
-                    </button>
-                </div>
             </div>
         </div>
-        </>
+
+        {/* Swap button */}
+        <div className="flex justify-center items-center shrink-0">
+            <button
+            onClick={handleSwap}
+            aria-label="Swap currencies"
+            className="bg-[var(--surface-secondary)] text-white rounded-md p-3 border border-[#353535] hover:border-[var(--primary)] transition-transform"
+            >
+            <IoIosSwap size={20} />
+            </button>
+        </div>
+
+        {/* Receive currency */}
+        <div className="bg-[var(--surface-secondary)] border border-[#353535] rounded-md p-4 w-full min-w-0 flex-1">
+            <h4 className="text-sm font-bold text-gray-200 mb-4">
+            RECEIVE
+            </h4>
+
+            <div className="flex items-center justify-between gap-3 min-w-0">
+            <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-mono font-bold text-[var(--primary)] min-w-0 break-all">
+                {formatAmount(Number(rate) * Number(amount))}
+            </h1>
+
+            <div className="shrink-0">
+                <CurrencySelector
+                value={quoteCurrency}
+                onChange={selectQuoteCurrency}
+                />
+            </div>
+            </div>
+        </div>
+        </div>
+
+        {/* Exchange rate and actions */}
+        <div className="border-t border-dotted border-gray-500 pt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <p className="font-mono text-sm sm:text-base break-words">
+            1 {baseCurrency} = {formatAmount(rate)} {quoteCurrency}
+        </p>
+
+        <div className="flex flex-col xs:flex-row sm:flex-row gap-2 sm:gap-3">
+            <button className="bg-[var(--primary)] uppercase px-3 py-2 rounded text-black text-sm font-semibold w-full sm:w-auto">
+            Favourited
+            </button>
+
+            <button className="border border-[var(--primary)] rounded px-3 py-2 text-sm w-full sm:w-auto">
+            Log Conversion
+            </button>
+        </div>
+        </div>
+    </div>
+    </>
+
         
     )
 }
