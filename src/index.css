@@ -1,0 +1,133 @@
+@import "tailwindcss";
+
+:root {
+  /* Background colors */
+  --background: #0A0A0A;
+  --background-secondary: #080808;
+  --surface: #171719;
+  --surface-secondary: #202022;
+  --surface-hover: #29292B;
+
+  /* Brand / Accent colors */
+  --primary: #CEF739;
+  --primary-hover: #B8E52B;
+  --primary-muted: rgba(206, 247, 57, 0.12);
+  --primary-glow: rgba(206, 247, 57, 0.15);
+
+  /* Text colors */
+  --foreground: #F5F5F5;
+  --text-primary: #F5F5F5;
+  --text-secondary: #A3A3A3;
+  --text-muted: #737373;
+  --text-disabled: #525252;
+
+  /* Status colors */
+  --success: #39D60B;
+  --success-muted: rgba(57, 214, 11, 0.12);
+  --danger: #EF4444;
+  --danger-muted: rgba(239, 68, 68, 0.12);
+  --warning: #FACC15;
+
+  /* Borders */
+  --border: #292929;
+  --border-light: #353535;
+  --border-focus: var(--primary);
+
+  /* Chart colors */
+  --chart-line: #CEF739;
+  --chart-fill: rgba(206, 247, 57, 0.20);
+  --chart-grid: #252525;
+
+  /* Typography */
+  --font-primary: "Space Mono", monospace;
+  --font-secondary: "Inter", sans-serif;
+
+  /* Border radius */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-card: 0 8px 24px rgba(0, 0, 0, 0.25);
+  --shadow-glow: 0 0 15px rgba(206, 247, 57, 0.12);
+
+  /* Transitions */
+  --transition: all 0.25s ease-in-out;
+}
+/* * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+} */
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-secondary);
+  min-height: 100vh;
+}
+
+button {
+  font-family: var(--font-primary);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.accent-button {
+  background: var(--primary);
+  color: var(--background);
+  border: none;
+  border-radius: var(--radius-md);
+  padding: 12px 20px;
+  font-weight: 700;
+}
+
+.accent-button:hover {
+  background: var(--primary-hover);
+  box-shadow: var(--shadow-glow);
+}
+
+.positive {
+  color: var(--success);
+}
+
+.negative {
+  color: var(--danger);
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+@keyframes market-scroll {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.market-ticker {
+  animation: market-scroll 35s linear infinite;
+}
+
+.market-ticker:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .market-ticker {
+    animation: none;
+  }
+}
